@@ -26,7 +26,7 @@ function initializeGame(){
 
 function disableRegion(element){
     element.style.cursor = 'default'
-    element.removeAddListener("click", handleBoardClick)
+    element.removeEventListener("click", handleBoardClick)
 }
 
 function handleBoardClick(e){
