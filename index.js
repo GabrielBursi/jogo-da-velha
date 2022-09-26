@@ -24,4 +24,26 @@ function initializeGame(){
     })
 }
 
+function disableRegion(element){
+    element.style.cursor = 'default'
+    element.removeAddListener("click", handleBoardClick)
+}
+
+function handleBoardClick(e){
+    const span = e.currentTarget
+    const region = span.dataset.region 
+    const rowColumnPair = region.split('.') 
+    const row = rowColumnPair[0]
+    const column = rowColumnPair[1]
+
+    if(turnPlayer === 'player1'){
+        span.innerText = "X"
+        vBoard[row][column] = "X"
+    }else{
+        span.innerText = "O";
+        vBoard[row][column] = "O"
+    }
+    disableRegion(span)
+}
+
 document.getElementById('start').addEventListener("click", initializeGame);
