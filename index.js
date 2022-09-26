@@ -1,12 +1,27 @@
-const nameP1 = document.getElementById('player1')
-const nameP2 = document.getElementById("player2");
-const playerTurn = document.getElementById("turnPlayer");
+const boardRegions = document.querySelectorAll("#gameBoard span");
+let vBoard = []
+let turnPlayer = ''
 
-const div = document.querySelector(".none")
-div.style.display = "none"
+function updateTitle(){
+    const playerInput = document.getElementById(turnPlayer)
+    if(playerInput.value === '' || playerInput.value === undefined || playerInput.value === null){
+        alert('Insira um nome')
+    }else{
+        document.getElementById("turnPlayer").innerText = playerInput.value
+    }
+}
 
-const btnStart = document.getElementById("start");
-btnStart.addEventListener("click", () => {
-    div.style.display = "";
-    playerTurn.innerHTML = nameP1.value
-})
+function initializeGame(){
+    vBoard = [['','',''],['','',''],['','','']]
+    turnPlayer = 'player1'
+    document.querySelector('h2').innerHTML = 'Vez de : <span id="turnPlayer"></span>'
+    updateTitle()
+    boardRegions.forEach(e => {
+        e.classList.remove('win')
+        e.innerText = ''
+        e.classList.add('cursor-pointer')
+        e.addEventListener("click", handleBoardClick);
+    })
+}
+
+document.getElementById('start').addEventListener("click", initializeGame);
